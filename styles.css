@@ -1,15 +1,77 @@
-/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    overflow: hidden; /* Importante! Remove a barra de rolagem nativa */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Remove a barra de rolagem nativa */
     background-color: #000;
     color: white;
     font-family: 'Inter', sans-serif;
 }
 
+/* --- Intro Animada --- */
+.intro-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000; /* Fundo preto do espaço */
+    z-index: 1000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 2s ease-in-out; /* Transição suave quando a tela toda sumir */
+}
+
+.intro-texto {
+    position: absolute;
+    font-size: 2.5rem; /* Texto bem grande e legível */
+    color: #fff;
+    text-align: center;
+    width: 100%; /* Garante centralização */
+    pointer-events: none;
+    display: none;
+    justify-content: center;
+    flex-wrap: wrap; /* Caso a frase seja longa, quebra linha */
+}
+
+.texto-final {
+    position: fixed;
+    top: 35%; /* MUDOU: De 40% para 35% (Mais alto) */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Garante alinhamento horizontal perfeito */  
+    font-size: 4rem; 
+    font-weight: 800;
+    color: #ffecd2;
+    text-shadow: 0 0 20px #ff9a9e, 0 0 40px #ff9a9e;
+    z-index: 500;
+    pointer-events: none;
+    display: none; 
+    justify-content: center;
+}
+
+.intro-texto span, .texto-final span {
+    opacity: 0;
+    transition: opacity 1s ease; /* Suavidade do fade */
+    display: inline-block; /* Permite transformações futuras */
+    min-width: 15px; /* Garante que espaços vazios tenham tamanho */
+}
+
+/* Quando adicionarmos essa classe via JS, o texto aparece e cresce levemente */
+.intro-texto.visivel {
+    opacity: 1;
+    transform: scale(1);
+}   
+
 .viewport {
     width: 100vw;
     height: 100vh;
-    cursor: grab; /* Mãozinha para indicar que pode arrastar */
+    cursor: grab; /* Mãozinha para indicar que pode arrastar (Fica ou não??)*/
     overflow: hidden;
     position: relative;
 }
@@ -20,12 +82,17 @@ body {
 
 .universe {
     position: absolute;
-    width: 3000px; /* Tamanho gigante do mapa */
+    width: 3000px;
     height: 3000px;
-    background: radial-gradient(circle, #1e293b 1px, transparent 1px) 0 0 / 50px 50px; /* Grade de fundo estilo Blueprint */
-    /* Começa centralizado (ajustaremos via JS se quiser) */
-    top: -1000px; 
-    left: -1000px;
+    background-color: #000;
+    
+    /* TRUQUE NOVO: Já deixamos a origem do zoom no centro do mapa (1500, 1500) pelo CSS */
+    transform-origin: 1500px 1500px; 
+    transition: transform 0.1s ease-out;
+    
+    /* Garante que comece no topo esquerdo para o JS calcular certo */
+    top: 0;
+    left: 0;
 }
 
 /* Estilo Único para o Big Bang */
@@ -97,3 +164,19 @@ line {
     z-index: 100;
 }
 .hidden { display: none; }
+
+/* Novo estilo para o "O Big Bang" */
+.texto-final {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem; /* Bem grande */
+    font-weight: 800;
+    color: #ffecd2; /* Mesma cor do Big Bang */
+    text-shadow: 0 0 20px #ff9a9e, 0 0 40px #ff9a9e; /* Brilho neon */
+    z-index: 500;
+    pointer-events: none; /* Para não atrapalhar o clique no mapa */
+    display: flex;
+    transition: opacity 1s ease-in-out;
+}
