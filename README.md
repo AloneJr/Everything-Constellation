@@ -11,6 +11,14 @@ Uma experiência interativa de exploração de dados (Data Visualization) onde o
 
 ---
 
+## 🖼️ Preview
+
+![Preview do Projeto](./assets/preview.gif)
+
+*Assista à introdução cinemática do projeto.*
+
+---
+
 ## 🚀 A Experiência (Features)
 
 Este projeto não utiliza bibliotecas externas (como Canvas API ou Three.js). Toda a lógica física e visual foi construída do zero com **Vanilla JS**.
